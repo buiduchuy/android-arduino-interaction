@@ -1,0 +1,4 @@
+http://www.arduino.cc/en/Main/ArduinoBoardNano
+http://playground.arduino.cc/Learning/Linux
+http://www.arduino.cc/en/Guide/Windows
+http://www.arduino.cc/en/Guide/HomePage
