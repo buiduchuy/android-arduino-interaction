@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +23,7 @@ import java.util.Set;
 
 import vn.edu.fpt.mob.activity.R;
 
-public class DeviceListActivity extends ActionBarActivity {
+public class DeviceListActivity extends Activity {
     private static final String TAG = "DeviceListActivity";
     private static final boolean D = false;
 
@@ -41,7 +40,7 @@ public class DeviceListActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.device_list);
+        setContentView(R.layout.activity_device_list);
 
         // Set default result to CANCELED, in case the user backs out
         setResult(Activity.RESULT_CANCELED);
@@ -55,8 +54,8 @@ public class DeviceListActivity extends ActionBarActivity {
             }
         });
 
-        ArrayAdapter<String> pairedDevicesAdapter = new ArrayAdapter<String>(this, R.layout.device_name);
-        mNewDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.device_name);
+        ArrayAdapter<String> pairedDevicesAdapter = new ArrayAdapter<String>(this, R.layout.activity_device);
+        mNewDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_device);
 
         ListView pairedListView = (ListView) findViewById(R.id.paired_devices);
         pairedListView.setAdapter(pairedDevicesAdapter);

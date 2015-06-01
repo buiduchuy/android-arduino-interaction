@@ -7,18 +7,19 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
@@ -29,7 +30,7 @@ import vn.edu.fpt.mob.Utils;
 import vn.edu.fpt.mob.activity.R;
 import vn.edu.fpt.mob.bluetooth.DeviceConnector;
 
-public class DeviceControlActivity extends ActionBarActivity {
+public class DeviceControlActivity extends MainActivity {
     private static final String DEVICE_NAME = "DEVICE_NAME";
     private static final String LOG = "LOG";
 
@@ -63,7 +64,7 @@ public class DeviceControlActivity extends ActionBarActivity {
         MSG_CONNECTING = getString(R.string.msg_connecting);
         MSG_CONNECTED = getString(R.string.msg_connected);
 
-        setContentView(R.layout.activity_terminal);
+        setContentView(R.layout.activity_main);
         if (isConnected() && (savedInstanceState != null)) {
             setDeviceName(savedInstanceState.getString(DEVICE_NAME));
         } else getSupportActionBar().setSubtitle(MSG_NOT_CONNECTED);
@@ -101,7 +102,6 @@ public class DeviceControlActivity extends ActionBarActivity {
             }
         });
     }
-    // ==========================================================================
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -112,7 +112,6 @@ public class DeviceControlActivity extends ActionBarActivity {
             outState.putString(LOG, log);
         }
     }
-    // ============================================================================
 
 
     /**
@@ -121,7 +120,6 @@ public class DeviceControlActivity extends ActionBarActivity {
     private boolean isConnected() {
         return (connector != null) && (connector.getState() == DeviceConnector.STATE_CONNECTED);
     }
-    // ==========================================================================
 
 
     /**
@@ -134,7 +132,6 @@ public class DeviceControlActivity extends ActionBarActivity {
             deviceName = null;
         }
     }
-    // ==========================================================================
 
 
     /**
@@ -145,8 +142,6 @@ public class DeviceControlActivity extends ActionBarActivity {
         Intent serverIntent = new Intent(this, DeviceListActivity.class);
         startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
     }
-    // ============================================================================
-
 
     /**
      * ????????? ?????????? ?????? "?????"
@@ -158,16 +153,12 @@ public class DeviceControlActivity extends ActionBarActivity {
         if (super.isAdapterReady()) startDeviceListActivity();
         return false;
     }
-    // ==========================================================================
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.device_control_activity, menu);
+        getSupportMenuInflater().inflate(R.menu.menu_device_control, menu);
         return true;
     }
-    // ============================================================================
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -187,27 +178,25 @@ public class DeviceControlActivity extends ActionBarActivity {
                 if (logTextView != null) logTextView.setText("");
                 return true;
 
-            case R.id.menu_send:
-                if (logTextView != null) {
-                    final String msg = logTextView.getText().toString();
-                    final Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_TEXT, msg);
-                    startActivity(Intent.createChooser(intent, getString(R.string.menu_send)));
-                }
-                return true;
-
-            case R.id.menu_settings:
-                final Intent intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
-                return true;
+//            case R.id.menu_send:
+//                if (logTextView != null) {
+//                    final String msg = logTextView.getText().toString();
+//                    final Intent intent = new Intent(Intent.ACTION_SEND);
+//                    intent.setType("text/plain");
+//                    intent.putExtra(Intent.EXTRA_TEXT, msg);
+//                    startActivity(Intent.createChooser(intent, getString(R.string.menu_send)));
+//                }
+//                return true;
+//
+//            case R.id.menu_settings:
+//                final Intent intent = new Intent(this, SettingsActivity.class);
+//                startActivity(intent);
+//                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-    // ============================================================================
-
 
     @Override
     public void onStart() {
@@ -232,8 +221,6 @@ public class DeviceControlActivity extends ActionBarActivity {
         this.show_direction = Utils.getBooleanPrefence(this, getString(R.string.pref_log_direction));
         this.needClean = Utils.getBooleanPrefence(this, getString(R.string.pref_need_clean));
     }
-    // ============================================================================
-
 
     /**
      * ???????? ?? ???????? ??????? ????????? ???????
@@ -246,8 +233,6 @@ public class DeviceControlActivity extends ActionBarActivity {
         else result = "";
         return result;
     }
-    // ============================================================================
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -270,8 +255,6 @@ public class DeviceControlActivity extends ActionBarActivity {
                 break;
         }
     }
-    // ==========================================================================
-
 
     /**
      * ????????? ?????????? ? ???????????
@@ -287,8 +270,6 @@ public class DeviceControlActivity extends ActionBarActivity {
             Utils.log("setupConnector failed: " + e.getMessage());
         }
     }
-    // ==========================================================================
-
 
     /**
      * ???????? ??????? ??????????
@@ -311,8 +292,6 @@ public class DeviceControlActivity extends ActionBarActivity {
             }
         }
     }
-    // ==========================================================================
-
 
     /**
      * ?????????? ?????? ? ???
@@ -340,14 +319,11 @@ public class DeviceControlActivity extends ActionBarActivity {
 
         if (clean) commandEditText.setText("");
     }
-    // =========================================================================
-
 
     void setDeviceName(String deviceName) {
         this.deviceName = deviceName;
         getSupportActionBar().setSubtitle(deviceName);
     }
-    // ==========================================================================
 
     /**
      * ?????????? ?????? ?????? ?? bluetooth-??????
@@ -408,5 +384,4 @@ public class DeviceControlActivity extends ActionBarActivity {
             }
         }
     }
-    // ==========================================================================
 }
