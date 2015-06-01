@@ -1,4 +1,4 @@
-package vn.edu.fpt.mob.main;
+package vn.edu.fpt.mob.activity;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
