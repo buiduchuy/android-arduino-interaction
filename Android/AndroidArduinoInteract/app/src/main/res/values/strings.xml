@@ -10,8 +10,8 @@
 
 
 
-    <string name="command_hint">command_hint</string>
-    <string name="button_send">button_send</string>
+    <string name="command_hint">Enter a command</string>
+    <string name="button_send">Send</string>
     <string name="title_paired_devices">title_paired_devices</string>
     <string name="title_other_devices">title_other_devices</string>
     <string name="search_message">search_message</string>

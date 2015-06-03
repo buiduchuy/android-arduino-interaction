@@ -46,7 +46,6 @@ public class DeviceControlActivity extends MainActivity {
     private TextView logTextView;
     private EditText commandEditText;
 
-    // ????????? ??????????
     private boolean hexMode, needClean;
     private boolean show_timings, show_direction;
     private String command_ending;
@@ -114,17 +113,11 @@ public class DeviceControlActivity extends MainActivity {
     }
 
 
-    /**
-     * ???????? ?????????? ??????????
-     */
     private boolean isConnected() {
         return (connector != null) && (connector.getState() == DeviceConnector.STATE_CONNECTED);
     }
 
 
-    /**
-     * ????????? ??????????
-     */
     private void stopConnection() {
         if (connector != null) {
             connector.stop();
@@ -134,20 +127,12 @@ public class DeviceControlActivity extends MainActivity {
     }
 
 
-    /**
-     * ?????? ????????? ??? ???????????
-     */
     private void startDeviceListActivity() {
         stopConnection();
         Intent serverIntent = new Intent(this, DeviceListActivity.class);
         startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
     }
 
-    /**
-     * ????????? ?????????? ?????? "?????"
-     *
-     * @return
-     */
     @Override
     public boolean onSearchRequested() {
         if (super.isAdapterReady()) startDeviceListActivity();
@@ -202,7 +187,6 @@ public class DeviceControlActivity extends MainActivity {
     public void onStart() {
         super.onStart();
 
-        // hex mode
         final String mode = Utils.getPrefence(this, getString(R.string.pref_commands_mode));
         this.hexMode = mode.equals("HEX");
         if (hexMode) {
@@ -213,18 +197,13 @@ public class DeviceControlActivity extends MainActivity {
             commandEditText.setFilters(new InputFilter[]{});
         }
 
-        // ????????? ??????
         this.command_ending = getCommandEnding();
 
-        // ?????? ??????????? ???? ??????
         this.show_timings = Utils.getBooleanPrefence(this, getString(R.string.pref_log_timing));
         this.show_direction = Utils.getBooleanPrefence(this, getString(R.string.pref_log_direction));
         this.needClean = Utils.getBooleanPrefence(this, getString(R.string.pref_need_clean));
     }
 
-    /**
-     * ???????? ?? ???????? ??????? ????????? ???????
-     */
     private String getCommandEnding() {
         String result = Utils.getPrefence(this, getString(R.string.pref_commands_ending));
         if (result.equals("\\r\\n")) result = "\r\n";
@@ -256,9 +235,6 @@ public class DeviceControlActivity extends MainActivity {
         }
     }
 
-    /**
-     * ????????? ?????????? ? ???????????
-     */
     private void setupConnector(BluetoothDevice connectedDevice) {
         stopConnection();
         try {
@@ -271,15 +247,11 @@ public class DeviceControlActivity extends MainActivity {
         }
     }
 
-    /**
-     * ???????? ??????? ??????????
-     */
     public void sendCommand(View view) {
         if (commandEditText != null) {
             String commandString = commandEditText.getText().toString();
             if (commandString.isEmpty()) return;
 
-            // ?????????? ?????? ? hex
             if (hexMode && (commandString.length() % 2 == 1)) {
                 commandString = "0" + commandString;
                 commandEditText.setText(commandString);
@@ -293,12 +265,6 @@ public class DeviceControlActivity extends MainActivity {
         }
     }
 
-    /**
-     * ?????????? ?????? ? ???
-     *
-     * @param message  - ????? ??? ???????????
-     * @param outgoing - ??????????? ????????
-     */
     void appendLog(String message, boolean hexMode, boolean outgoing, boolean clean) {
 
         StringBuilder msg = new StringBuilder();
