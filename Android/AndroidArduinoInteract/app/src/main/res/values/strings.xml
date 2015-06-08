@@ -8,39 +8,37 @@
 
     <string name="title_activity_device_list">Device List</string>
 
-
-
     <string name="command_hint">Enter a command</string>
     <string name="button_send">Send</string>
     <string name="title_paired_devices">title_paired_devices</string>
     <string name="title_other_devices">title_other_devices</string>
     <string name="search_message">search_message</string>
     <string name="action_bluetooth">action_bluetooth</string>
-    <string name="none_paired" />
-    <string name="empty_device_name" />
-    <string name="select_device" />
-    <string name="none_found" />
-    <string name="msg_not_connected" />
-    <string name="msg_connecting" />
-    <string name="msg_connected" />
-    <string name="commands_mode" />
-    <string name="pref_commands_mode" />
-    <string name="commands_mode_summary" />
-    <string name="pref_commands_ending" />
-    <string name="commands_ending_summary" />
-    <string name="pref_need_clean" />
-    <string name="need_clean_summary" />
-    <string name="need_clean" />
-    <string name="log_settings_category" />
-    <string name="pref_log_timing" />
-    <string name="log_time_summary" />
-    <string name="log_time" />
-    <string name="pref_log_direction" />
-    <string name="log_direction_summary" />
-    <string name="log_direction" />
+    <string name="none_paired">none_paired</string>
+    <string name="empty_device_name">empty_device_name</string>
+    <string name="select_device">select_device</string>
+    <string name="none_found">none_found</string>
+    <string name="msg_not_connected">msg_not_connected</string>
+    <string name="msg_connecting">msg_connecting</string>
+    <string name="msg_connected">msg_connected</string>
+    <string name="commands_mode">commands_mode</string>
+    <string name="pref_commands_mode">pref_commands_mode</string>
+    <string name="commands_mode_summary">commands_mode_summary</string>
+    <string name="pref_commands_ending">pref_commands_ending</string>
+    <string name="commands_ending_summary">commands_ending_summary</string>
+    <string name="pref_need_clean">pref_need_clean</string>
+    <string name="need_clean_summary">need_clean_summary</string>
+    <string name="need_clean">need_clean</string>
+    <string name="log_settings_category">log_settings_category</string>
+    <string name="pref_log_timing">pref_log_timing</string>
+    <string name="log_time_summary">log_time_summary</string>
+    <string name="log_time">log_time</string>
+    <string name="pref_log_direction">pref_log_direction</string>
+    <string name="log_direction_summary">log_direction_summary</string>
+    <string name="log_direction">log_direction</string>
     <string name="menu_clear">Clear Log</string>
     <string name="menu_send">Send Log</string>
     <string name="menu_settings">Setting</string>
     <string name="title_activity_setting">Setting</string>
-    <string name="no_bt_support" />
+    <string name="no_bt_support">no_bt_support</string>
 </resources>

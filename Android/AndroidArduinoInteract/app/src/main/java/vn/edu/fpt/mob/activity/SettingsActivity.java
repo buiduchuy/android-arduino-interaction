@@ -31,8 +31,6 @@ public class SettingsActivity extends SherlockPreferenceActivity
             setPrefenceTitle(getString(R.string.pref_commands_mode));
             setPrefenceTitle(getString(R.string.pref_commands_ending));
         }
-        // ============================================================================
-
 
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
@@ -45,19 +43,12 @@ public class SettingsActivity extends SherlockPreferenceActivity
                     return super.onOptionsItemSelected(item);
             }
         }
-        // ============================================================================
-
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String value) {
             setPrefenceTitle(value);
         }
-        // ============================================================================
 
-
-        /**
-         * ????????? ????????? ??????
-         */
     private void setPrefenceTitle(String TAG) {
         final Preference preference = findPreference(TAG);
         if (preference == null) return;
@@ -67,5 +58,4 @@ public class SettingsActivity extends SherlockPreferenceActivity
             preference.setTitle(title);
         }
     }
-    // ============================================================================
 }

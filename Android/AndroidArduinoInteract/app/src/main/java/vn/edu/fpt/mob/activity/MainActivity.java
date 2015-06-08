@@ -30,7 +30,6 @@ public class MainActivity extends SherlockActivity {
     // if there is a request already in progress
     // See: https://code.google.com/p/android/issues/detail?id=24931#c1
     boolean pendingRequestEnableBt = false;
-    // ==========================================================================
 
     @Override
     protected void onCreate(Bundle state) {
@@ -47,8 +46,6 @@ public class MainActivity extends SherlockActivity {
             Utils.log(no_bluetooth);
         }
     }
-    // ==========================================================================
-
 
     @Override
     public void onStart() {
@@ -61,48 +58,27 @@ public class MainActivity extends SherlockActivity {
             startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
         }
     }
-    // ==========================================================================
-
 
     @Override
     public synchronized void onResume() {
         super.onResume();
     }
-    // ==========================================================================
-
 
     @Override
     public synchronized void onPause() {
         super.onPause();
     }
-    // ==========================================================================
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(SAVED_PENDING_REQUEST_ENABLE_BT, pendingRequestEnableBt);
     }
-    // ==========================================================================
 
-
-    /**
-     * ???????? ????????
-     *
-     * @return - true, ???? ????? ? ??????
-     */
     boolean isAdapterReady() {
         return (btAdapter != null) && (btAdapter.isEnabled());
     }
-    // ==========================================================================
 
-
-    /**
-     * ?????????? ?????????? ???? ? ???????????????.
-     * TODO: ??? ????????????????? ????? ????????
-     *
-     * @param message - ?????????
-     */
     void showAlertDialog(String message) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle(getString(R.string.app_name));
@@ -110,5 +86,4 @@ public class MainActivity extends SherlockActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-    // ==========================================================================
 }

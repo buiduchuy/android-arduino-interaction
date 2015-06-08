@@ -172,9 +172,6 @@ public class BluetoothUtils {
         return getDeviceServices(uuids);
     }
 
-    /**
-     * see http://habrahabr.ru/post/144547/
-     */
     public static BluetoothSocket createRfcommSocket(BluetoothDevice device) {
         BluetoothSocket tmp = null;
         try {
