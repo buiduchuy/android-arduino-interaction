@@ -123,7 +123,6 @@ public class DeviceListActivity extends Activity {
             // Get the device MAC address, which is the last 17 chars in the View
             CharSequence info = ((TextView) v).getText();
             if (info != null) {
-                // TODO this is not so cool...
                 CharSequence address = info.toString().substring(info.length() - 17);
                 Intent intent = new Intent();
                 intent.putExtra(EXTRA_DEVICE_ADDRESS, address);

@@ -45,6 +45,9 @@ public class DeviceConnector {
         mState = STATE_NONE;
     }
 
+    /**
+     * connect to device
+     */
     public synchronized void connect() {
         if (D) Log.d(TAG, "connect to: " + connectedDevice);
 
@@ -68,6 +71,9 @@ public class DeviceConnector {
         setState(STATE_CONNECTING);
     }
 
+    /**
+     * disconnect
+     */
     public synchronized void stop() {
         if (D) Log.d(TAG, "stop");
 
@@ -86,16 +92,23 @@ public class DeviceConnector {
         setState(STATE_NONE);
     }
 
+    /**
+     * set status of device
+     *
+     * @param state - the status
+     */
     private synchronized void setState(int state) {
         if (D) Log.d(TAG, "setState() " + mState + " -> " + state);
         mState = state;
         mHandler.obtainMessage(DeviceControlActivity.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
     }
 
+    /**
+     * get device status
+     */
     public synchronized int getState() {
         return mState;
     }
-
 
     public synchronized void connected(BluetoothSocket socket) {
         if (D) Log.d(TAG, "connected");
@@ -157,6 +170,9 @@ public class DeviceConnector {
         setState(STATE_NONE);
     }
 
+    /**
+     * class stream connect to BT device
+     */
     private class ConnectThread extends Thread {
         private static final String TAG = "ConnectThread";
         private static final boolean D = false;
@@ -220,7 +236,7 @@ public class DeviceConnector {
     }
 
     /**
-     *
+     * class stream to transfer data from BT device
      */
     private class ConnectedThread extends Thread {
         private static final String TAG = "ConnectedThread";
@@ -250,7 +266,7 @@ public class DeviceConnector {
         }
 
         /**
-         *
+         * read incoming stream
          */
         public void run() {
             if (D) Log.i(TAG, "ConnectedThread run");
@@ -259,12 +275,12 @@ public class DeviceConnector {
             StringBuilder readMessage = new StringBuilder();
             while (true) {
                 try {
-                    //
+                    // read input data from the stream and collected in a response line
                     bytes = mmInStream.read(buffer);
                     String readed = new String(buffer, 0, bytes);
                     readMessage.append(readed);
 
-                    //
+                    // check end of stream then stop stream line
                     if (readed.contains("\n")) {
                         mHandler.obtainMessage(DeviceControlActivity.MESSAGE_READ, bytes, -1, readMessage.toString()).sendToTarget();
                         readMessage.setLength(0);
@@ -279,7 +295,7 @@ public class DeviceConnector {
         }
 
         /**
-         *
+         * write data to send to device
          */
         public void writeData(byte[] chunk) {
 
@@ -295,7 +311,7 @@ public class DeviceConnector {
 
 
         /**
-         *
+         * write byte data
          */
         public void write(byte command) {
             byte[] buffer = new byte[1];
@@ -312,7 +328,7 @@ public class DeviceConnector {
         }
 
         /**
-         *
+         * close socket when cancel operation
          */
         public void cancel() {
             try {
