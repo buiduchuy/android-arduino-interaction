@@ -5,6 +5,8 @@
 #include <SoftwareSerial.h>// import the serial library
 #include "string.h"
 
+
+// Mảng xác định cách hiển thị của các kí tự
 const char font7x5[] PROGMEM = {
   0x00, 0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00, 0x00,
@@ -137,19 +139,15 @@ const char font7x5[] PROGMEM = {
 };
 
 /*
- Now we need a LedControl to work with.
- ***** These pin numbers will probably not work with your hardware *****
  pin 12 is connected to the DataIn
  pin 11 is connected to the CLK
  pin 10 is connected to LOAD
- We have only a single MAX72XX.
  */
 LedControl lc = LedControl(12, 11, 10, 2);
 int index = 0;
 byte text[512];
 byte byteRead;
 
-/* we always wait a bit between updates of the display */
 unsigned long delaytime = 200;
 
 SoftwareSerial Genotronex(0, 1); // RX, TX
@@ -160,6 +158,7 @@ char character;
 int flag = 300;
 int temp;
 
+// thiết lập ban đầu của Arduino
 void setup() {
   /*
    The MAX72XX is in power-saving mode on startup,
@@ -182,7 +181,7 @@ void setup() {
   //Genotronex.begin(9600);
 }
 
-
+// Chương trình xử lý chính
 void loop()
 {
   if (Serial.available() > 0) {
@@ -206,7 +205,7 @@ void loop()
   content = "";
 }
 
-
+// Map kí tự tách được với hiển thị của nó
 void copyChar2Buffer(char ch)
 {
   long tchr = ch;
@@ -217,17 +216,18 @@ void copyChar2Buffer(char ch)
   index += 5;
 }
 
-
+// tách chuỗi nhận được thành từng kí tự và map với hiển thị
 void buffer(String message)
 {
-  //Set Start SPACE
+  // Khoảng trắng để chữ chạy từ bên phải
+  // 2 tấm led - 16 đèn led
   for (int i = 0; i < 16; i++) text[i] = B00000000;
   index = 16;
   //Copy character hex
   for (int i = 0; i < message.length(); i++)
   {
     copyChar2Buffer(message[i]);
-    text[index] = B00000000;
+    text[index] = B00000000; // khoảng trắng nhỏ giữa 2 kí tự
     index++;
   }
   //Set end SPACE
@@ -236,6 +236,8 @@ void buffer(String message)
 
 }
 
+// chỉ định cách hiển thị và chuyển động của led
+// chữ chạy sang trái.
 void scrollLeft()
 {
   for (int co = 0; co < index - 16; co ++)
