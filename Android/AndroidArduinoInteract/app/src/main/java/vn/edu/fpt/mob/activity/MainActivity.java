@@ -40,6 +40,7 @@ public class MainActivity extends SherlockActivity {
             pendingRequestEnableBt = state.getBoolean(SAVED_PENDING_REQUEST_ENABLE_BT);
         }
         btAdapter = BluetoothAdapter.getDefaultAdapter();
+        // Check bluetooth adapter in device, if not show message
         if (btAdapter == null) {
             final String no_bluetooth = getString(R.string.no_bt_support);
             showAlertDialog(no_bluetooth);
@@ -75,6 +76,7 @@ public class MainActivity extends SherlockActivity {
         outState.putBoolean(SAVED_PENDING_REQUEST_ENABLE_BT, pendingRequestEnableBt);
     }
 
+    // If bluetooth adapter has been turn on, return true and vice versa
     boolean isAdapterReady() {
         return (btAdapter != null) && (btAdapter.isEnabled());
     }

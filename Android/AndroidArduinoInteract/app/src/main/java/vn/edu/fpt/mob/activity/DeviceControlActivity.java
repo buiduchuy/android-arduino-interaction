@@ -292,7 +292,7 @@ public class DeviceControlActivity extends MainActivity {
     }
 
     /**
-     * ?????????? ?????? ?????? ?? bluetooth-??????
+     *
      */
     private static class BluetoothResponseHandler extends Handler {
         private WeakReference<DeviceControlActivity> mActivity;
